@@ -1,0 +1,6 @@
+{
+  "name": "eBay Order Fulfillment Automation Demo",
+  "description": "Interactive presentation, order sheet management, and Python Selenium browser automation simulator for the 3-day eBay-to-supplier order fulfillment demo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
