@@ -1,10 +1,10 @@
 export const PYTHON_AUTOMATION_SCRIPT = `"""
-eBay-to-Supplier Order Fulfillment Automation (3-Day Demo Prototype)
+eBay-to-SHEIN Supplier Order Fulfillment Automation (3-Day Demo Prototype)
 Tools: Python, Selenium, pandas, ChromeDriver
 
 NOTE: This script is configured for safe demo testing.
 - It reads orders from 'ebay_orders.xlsx'.
-- It opens the supplier page in Chrome.
+- It opens the SHEIN product & checkout page in Chrome.
 - It auto-fills customer details and shipping address.
 - IT DOES NOT CLICK 'PLACE ORDER' (Safe Mode - No payment or real order placed).
 - It updates the status in the Excel sheet to 'Processed' and moves to the next order.
@@ -19,7 +19,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def run_automation_demo(excel_path='ebay_orders.xlsx'):
     print("==================================================")
-    print(" eBay -> Supplier Fulfillment Automation (3-Day Demo)")
+    print(" eBay -> SHEIN Order Fulfillment Automation (Demo)")
     print("==================================================")
 
     # 1. Load Order Sheet using pandas
@@ -53,15 +53,15 @@ def run_automation_demo(excel_path='ebay_orders.xlsx'):
 
             print(f"\\n[PROCESSING] Starting Order {order_id} for {customer_name}...")
 
-            # 3. Open Supplier Product & Checkout Link
-            print(f"[NAVIGATE] Opening -> {supplier_link}")
+            # 3. Open SHEIN Product & Checkout Link
+            print(f"[NAVIGATE] Opening SHEIN -> {supplier_link}")
             driver.get(supplier_link)
             time.sleep(2) # Allow page load
 
             # 4. Auto-Fill Customer & Shipping Information Demo
-            print("[AUTO-FILL] Filling shipping details into form fields...")
+            print("[AUTO-FILL] Filling shipping details into SHEIN form fields...")
             try:
-                # Example element selectors for supplier checkout form
+                # Example element selectors for SHEIN checkout form
                 name_field = wait.until(EC.presence_of_element_located((By.ID, "shipping_name")))
                 name_field.clear()
                 name_field.send_keys(customer_name)
@@ -75,7 +75,7 @@ def run_automation_demo(excel_path='ebay_orders.xlsx'):
                 phone_field.send_keys(phone)
 
                 time.sleep(1.5)
-                print("[SUCCESS] Form fields successfully auto-filled!")
+                print("[SUCCESS] SHEIN form fields successfully auto-filled!")
             except Exception as form_err:
                 print(f"[WARNING] Form fields demo mock fill simulated: {form_err}")
                 time.sleep(2)
@@ -92,7 +92,7 @@ def run_automation_demo(excel_path='ebay_orders.xlsx'):
             time.sleep(2) # Pause before next order
 
         print("\\n==================================================")
-        print(" [COMPLETE] All pending orders processed successfully!")
+        print(" [COMPLETE] All pending SHEIN orders processed successfully!")
         print("==================================================")
 
     except Exception as e:
