@@ -289,18 +289,26 @@ export const SimulatorTab: React.FC<SimulatorTabProps> = ({ orders, setOrders })
 
           {/* Progress Indicator */}
           <div className="bg-slate-950 p-4 border-t border-slate-800">
-            <div className="flex justify-between text-xs text-slate-400 mb-2">
-              <span>Progress: Order {currentIndex + 1} of {orders.length}</span>
-              <span>{Math.round(((currentIndex + (stepPhase === 'completed' ? 1 : 0)) / orders.length) * 100)}%</span>
-            </div>
-            <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-emerald-500 h-full transition-all duration-300"
-                style={{
-                  width: `${((currentIndex + (stepPhase === 'completed' ? 1 : 0)) / orders.length) * 100}%`,
-                }}
-              />
-            </div>
+            {(() => {
+              const processedCount = orders.filter((o) => o.status === 'Processed').length;
+              const percent = Math.min(100, Math.round((processedCount / orders.length) * 100));
+              return (
+                <>
+                  <div className="flex justify-between text-xs text-slate-400 mb-2">
+                    <span>Progress: {processedCount} of {orders.length} Processed</span>
+                    <span>{percent}%</span>
+                  </div>
+                  <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-emerald-500 h-full transition-all duration-300"
+                      style={{
+                        width: `${percent}%`,
+                      }}
+                    />
+                  </div>
+                </>
+              );
+            })()}
           </div>
         </div>
       </div>
